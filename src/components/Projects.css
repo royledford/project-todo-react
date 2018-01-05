@@ -1,0 +1,33 @@
+.page-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--darkblue);
+}
+
+.content-wrap {
+  position: relative;
+  width: 375px;
+  height: 667px;
+  border: 1px solid var(--darkblue);
+  background: linear-gradient(120deg, #5d5aa2, #2b2a57, #1f1d3e);
+}
+
+.projects-title {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 20px;
+}
+
+.projects-progress {
+  width: 126px;
+  height: 126px;
+  background-color: var(--lightblue);
+  margin: 0 auto;
+  margin-bottom: 30px;
+}

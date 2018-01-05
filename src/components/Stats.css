@@ -1,0 +1,32 @@
+.stat-wrap {
+  position: relative;
+  height: 68px;
+  background-color: var(--lightblue);
+}
+
+.stat {
+  text-align: center;
+  display: inline-block;
+  width: 124px;
+  height: 68px;
+  background-color: var(--darkblue);
+  margin-right: 1px;
+  color: white;
+  padding-top: 10px;
+}
+
+.stat:last-child {
+  margin-right: -1px;
+}
+
+.stat-num {
+  font-size: 31px;
+  line-height: 31px;
+  font-weight: 700;
+}
+
+.stat-text {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 300;
+}
