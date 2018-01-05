@@ -1,0 +1,22 @@
+.meter h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.meter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 126px;
+  height: 126px;
+  color: white;
+  font-size: 31px;
+  background-color: var(--lightblue);
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.meter-text {
+  font-size: 12px;
+}

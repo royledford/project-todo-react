@@ -7,23 +7,19 @@ import './Footer.css'
 
 export default class Footer extends Component {
   static propTypes = {
-    onClick: PropTypes.func,
-    someProp: PropTypes.string,
-  }
-  static defaultProps = {
-    someProp: 'someValue',
+    add: PropTypes.func.isRequired,
   }
 
   render() {
+    const { add } = this.props
+
     return (
       <footer className="footer">
         <a href="#" className="footer-icon">
           <FaPencil />
         </a>
-        <div className="footer-featured">
-          <a href="#" className="footer-icon-lrg">
-            <FaPlus />
-          </a>
+        <div className="footer-featured" onClick={add}>
+          <FaPlus />
         </div>
         <a href="#" className="footer-icon">
           <FaTrashO />

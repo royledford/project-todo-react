@@ -1,9 +1,9 @@
-import { taskData } from './tasks'
+import { tasks } from './tasks'
 import { sortBy } from 'lodash'
 
 class TasksApi {
-  static getProjects = () => {
-    return sortBy(taskData, 'sortString')
+  static getTasks = () => {
+    return sortBy(tasks, 'sortString')
   }
 }
 

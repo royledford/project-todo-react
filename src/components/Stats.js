@@ -17,16 +17,16 @@ export default class Stats extends Component {
     return (
       <div className="stat-wrap">
         <div className="stat">
-          <h2 className="stat-num">20</h2>
-          <span className="stat-text">Projects</span>
+          <h2 className="stat-num">{leftText}</h2>
+          <span className="stat-text">{leftLabel}</span>
         </div>
         <div className="stat">
-          <h2 className="stat-num">25</h2>
-          <span className="stat-text">Tasks</span>
+          <h2 className="stat-num">{centerText}</h2>
+          <span className="stat-text">{centerLabel}</span>
         </div>
         <div className="stat">
-          <h2 className="stat-num">32%</h2>
-          <span className="stat-text">Remaining</span>
+          <h2 className="stat-num">{rightText}</h2>
+          <span className="stat-text">{rightLabel}</span>
         </div>
       </div>
     )
