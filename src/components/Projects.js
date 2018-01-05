@@ -28,12 +28,12 @@ export default class Projects extends Component {
           <h1 className="projects-title">Projects</h1>
           <div className="projects-progress" />
           <Stats
-            posOneLabel="Projects"
-            posOneText="20"
-            posTwoLabel="Projects"
-            posTwoText="20"
-            posThreeLabel="Projects"
-            posThreeText="20"
+            leftLabel="Projects"
+            leftText="20"
+            centerLabel="Projects"
+            centerText="20"
+            rightLabel="Projects"
+            rightText="20"
           />
           <ul className="projects-list">
             <Project name="Build Deathstar" />

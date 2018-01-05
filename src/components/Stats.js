@@ -4,16 +4,16 @@ import './Stats.css'
 
 export default class Stats extends Component {
   static propTypes = {
-    posOneLabel: PropTypes.string.isRequired,
-    posOneText: PropTypes.string.isRequired,
-    posTwoLabel: PropTypes.string.isRequired,
-    posTwoText: PropTypes.string.isRequired,
-    posThreeLabel: PropTypes.string.isRequired,
-    posThreeText: PropTypes.string.isRequired,
+    leftLabel: PropTypes.string.isRequired,
+    leftText: PropTypes.string.isRequired,
+    centerLabel: PropTypes.string.isRequired,
+    centerText: PropTypes.string.isRequired,
+    rightLabel: PropTypes.string.isRequired,
+    rightText: PropTypes.string.isRequired,
   }
 
   render() {
-    const { posOneLabel, posOneText, posTwoLabel, posTwoText, posThreeLabel, posThreeText } = this.props
+    const { leftLabel, leftText, centerLabel, centerText, rightLabel, rightText } = this.props
     return (
       <div className="stat-wrap">
         <div className="stat">
