@@ -5,18 +5,24 @@ import './Project.css'
 
 export default class Project extends Component {
   static propTypes = {
+    id: PropTypes.number.isRequired,
     name: PropTypes.string,
+    showTasks: PropTypes.func.isRequired,
   }
   static defaultProps = {
     name: 'New Project',
   }
 
+  handleShowTasks = () => {
+    this.props.showTasks(this.props.id)
+  }
+
   render() {
-    const { name } = this.props
+    const { name, showTasks, id } = this.props
     return (
       <li className="list-item">
         {name}
-        <FaCaretRight className="project-icon" />
+        <FaCaretRight className="project-icon" onClick={this.handleShowTasks} />
       </li>
     )
   }

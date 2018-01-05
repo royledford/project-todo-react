@@ -33,3 +33,9 @@
   margin: 0 auto;
   margin-bottom: 30px;
 }
+
+.projects-list {
+  height: 324px;
+  overflow: hidden;
+  overflow-y: scroll;
+}

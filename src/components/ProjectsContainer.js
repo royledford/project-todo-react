@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import Projects from './Projects'
 import ProjectApi from '../data/ProjectsApi'
 import TasksApi from '../data/tasksApi'
@@ -10,6 +11,8 @@ export default class ProjectsContainer extends Component {
     this.state = {
       projects: [],
       tasks: [],
+      selectedProject: 0,
+      redirectToTasks: false,
     }
 
     this.handleAddProject = this.handleAddProject.bind(this)
@@ -50,6 +53,10 @@ export default class ProjectsContainer extends Component {
     return maxBy(this.state.projects, 'id').id
   }
 
+  handleShowTasks = id => {
+    this.setState({ selectedProject: id, redirectToTasks: true })
+  }
+
   //----------------------------
   // Cod for the app
   //----------------------------
@@ -65,15 +72,23 @@ export default class ProjectsContainer extends Component {
   }
 
   render() {
-    return (
-      <Projects
-        projects={this.state.projects}
-        projectCount={this.getProjectCount()}
-        taskCount={this.getTaskCount()}
-        percentageRemaining={this.getPercentageRemaining() * 100 + '%'}
-        percentageComplete={this.getPercentageCompleted() * 100 + '%'}
-        addProject={this.handleAddProject}
-      />
-    )
+    const { projects, selectedProject, redirectToTasks } = this.state
+
+    if (redirectToTasks) {
+      const newPath = '/tasks/' + selectedProject
+      return <Redirect to={newPath} />
+    } else {
+      return (
+        <Projects
+          projects={this.state.projects}
+          projectCount={this.getProjectCount()}
+          taskCount={this.getTaskCount()}
+          percentageRemaining={this.getPercentageRemaining() * 100 + '%'}
+          percentageComplete={this.getPercentageCompleted() * 100 + '%'}
+          addProject={this.handleAddProject}
+          showTasks={this.handleShowTasks}
+        />
+      )
+    }
   }
 }
