@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Stats from './Stats'
+import Project from './Project'
+import Footer from './Footer'
 import './Projects.css'
 
 export default class Projects extends Component {
@@ -27,29 +29,19 @@ export default class Projects extends Component {
           <div className="projects-progress" />
           <Stats
             posOneLabel="Projects"
-            PosOneText="20"
+            posOneText="20"
             posTwoLabel="Projects"
-            PosTwoText="20"
+            posTwoText="20"
             posThreeLabel="Projects"
-            PosThreeText="20"
+            posThreeText="20"
           />
-          <ol className="projects-list">
-            <li className="list-item">Build Deathstar</li>
-            <li className="list-item">Crush rebellion</li>
-            <li className="list-item">Turn Luke to darkside</li>
-          </ol>
+          <ul className="projects-list">
+            <Project name="Build Deathstar" />
+            <Project name="Crush rebellion" />
+            <Project name="Turn Luke to darkside" />
+          </ul>
 
-          <footer className="footer">
-            <a href="#" className="footer-icon">
-              edit
-            </a>
-            <a href="#" className="footer-icon-lrg">
-              +
-            </a>
-            <a href="#" className="footer-icon">
-              trash
-            </a>
-          </footer>
+          <Footer />
         </div>
       </div>
     )

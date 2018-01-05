@@ -5,7 +5,8 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: var(--darkblue);
+  background-color: var(--darkestblue);
+  background: linear-gradient(120deg, #1f1d3e, #2b2a57, #5d5aa2);
 }
 
 .content-wrap {

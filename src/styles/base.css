@@ -17,18 +17,18 @@ h6 {
 }
 
 a:link {
-  color: #54c0a0;
+  color: white;
   text-decoration: none;
 }
 
 a:visited {
-  color: #54c0a0;
+  color: white;
 }
 
 a:hover {
-  color: #357a66;
+  color: var(--lightblue);
 }
 
 a:active {
-  color: #54c0a0;
+  color: var(--lightblue);
 }

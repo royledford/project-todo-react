@@ -1,0 +1,35 @@
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 53px;
+
+  line-height: 53px;
+  font-size: 16px;
+  margin: 0 20px;
+  text-indent: 4px;
+
+  color: white;
+  list-style: none;
+  border-bottom: 1px solid white;
+}
+
+.project-icon {
+  height: 53px;
+  font-size: 22px;
+  transition: all 250ms ease-out;
+}
+
+.project-icon:hover {
+  font-size: 32px;
+  transition: all 250ms ease-out;
+}
+
+.list-item:hover {
+  background-color: var(--darkblue);
+  transition: all 250ms ease-in-out;
+}
+
+.list-item-selected {
+  background-color: var(--darkblue);
+}
