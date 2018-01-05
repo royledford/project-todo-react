@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Stats from './Stats'
+import Stats from '../Common/Stats'
 import Project from './Project'
-import ProgressMeter from './ProgressMeter'
-import Footer from './Footer'
+import ProgressMeter from '../Common/ProgressMeter'
+import Footer from '../Common/Footer'
 import './Projects.css'
 
 export default class Projects extends Component {

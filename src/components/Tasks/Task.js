@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import './Task.css'
 
-export default class TasksContainer extends Component {
+export default class Task extends Component {
   static propTypes = {
     onClick: PropTypes.func,
     someProp: PropTypes.string,
@@ -18,6 +19,7 @@ export default class TasksContainer extends Component {
   }
 
   render() {
-    return <h1>value</h1>
+    const { name } = this.props
+    return <li className="list-item">{name}</li>
   }
 }

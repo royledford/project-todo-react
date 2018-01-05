@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import Projects from './Projects'
-import ProjectApi from '../data/ProjectsApi'
-import TasksApi from '../data/tasksApi'
+import Tasks from '../Tasks/Tasks'
+import ProjectApi from '../../data/ProjectsApi'
+import TasksApi from '../../data/tasksApi'
 import { maxBy } from 'lodash'
 
 export default class ProjectsContainer extends Component {
@@ -13,6 +13,7 @@ export default class ProjectsContainer extends Component {
       tasks: [],
       selectedProject: 0,
       redirectToTasks: false,
+      selectedProjectName: '',
     }
 
     this.handleAddProject = this.handleAddProject.bind(this)
@@ -27,8 +28,15 @@ export default class ProjectsContainer extends Component {
   //----------------------------
   // Helper methods for the data (a real api should provide these)
   //----------------------------
-  getTaskCount = () => {
-    return this.state.tasks.length
+  getTaskCount = (id = -1) => {
+    if (id === -1) {
+      // get all
+      return this.state.tasks.length
+    } else {
+      // get for passed id
+      const projectCompleted = this.state.tasks.filter(task => task.projectId === id && task.complete)
+      return projectCompleted.length
+    }
   }
 
   getTaskCountCompleted = () => {
@@ -54,11 +62,18 @@ export default class ProjectsContainer extends Component {
   }
 
   handleShowTasks = id => {
-    this.setState({ selectedProject: id, redirectToTasks: true })
+    const projectName = this.state.projects.filter(project => project.id === id)[0].title
+    const projectTaskCount = this.getTaskCount(id)
+    this.setState({
+      selectedProject: id,
+      selectedProjectName: projectName,
+      redirectToTasks: true,
+      projectTaskCount: projectTaskCount,
+    })
   }
 
   //----------------------------
-  // Cod for the app
+  // Code for the app
   //----------------------------
   handleAddProject = () => {
     const highestID = this.getNextProjectId()
@@ -72,11 +87,10 @@ export default class ProjectsContainer extends Component {
   }
 
   render() {
-    const { projects, selectedProject, redirectToTasks } = this.state
+    const { projects, tasks, selectedProject, redirectToTasks, selectedProjectName, projectTaskCount } = this.state
 
     if (redirectToTasks) {
-      const newPath = '/tasks/' + selectedProject
-      return <Redirect to={newPath} />
+      return <Tasks tasks={tasks} projectName={selectedProjectName} taskCount={projectTaskCount} />
     } else {
       return (
         <Projects

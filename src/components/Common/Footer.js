@@ -15,13 +15,13 @@ export default class Footer extends Component {
 
     return (
       <footer className="footer">
-        <a href="#" className="footer-icon">
+        <a href="/" className="footer-icon">
           <FaPencil />
         </a>
         <div className="footer-featured" onClick={add}>
           <FaPlus />
         </div>
-        <a href="#" className="footer-icon">
+        <a href="/" className="footer-icon">
           <FaTrashO />
         </a>
       </footer>

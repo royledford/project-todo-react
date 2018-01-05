@@ -18,7 +18,7 @@ export default class Project extends Component {
   }
 
   render() {
-    const { name, showTasks, id } = this.props
+    const { name } = this.props
     return (
       <li className="list-item">
         {name}
