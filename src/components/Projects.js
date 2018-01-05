@@ -7,26 +7,25 @@ import './Projects.css'
 
 export default class Projects extends Component {
   static propTypes = {
-    onClick: PropTypes.func,
-    someProp: PropTypes.string,
+    projects: PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+    }),
   }
   static defaultProps = {
-    someProp: 'someValue',
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      someState: true,
-    }
+    // someProp: 'someValue',
   }
 
   render() {
+    const { projects } = this.props
+    const projectsRender = projects.map(project => <Project key={project.id} name={project.title} />)
+
     return (
       <div className="page-wrap">
         <div className="content-wrap">
           <h1 className="projects-title">Projects</h1>
           <div className="projects-progress" />
+
           <Stats
             leftLabel="Projects"
             leftText="20"
@@ -35,11 +34,8 @@ export default class Projects extends Component {
             rightLabel="Projects"
             rightText="20"
           />
-          <ul className="projects-list">
-            <Project name="Build Deathstar" />
-            <Project name="Crush rebellion" />
-            <Project name="Turn Luke to darkside" />
-          </ul>
+
+          <ul className="projects-list">{projectsRender}</ul>
 
           <Footer />
         </div>
