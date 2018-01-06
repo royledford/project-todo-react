@@ -3,7 +3,7 @@ import Projects from './Projects/Projects'
 import Tasks from './Tasks/Tasks'
 import ProjectApi from '../data/ProjectsApi'
 import TasksApi from '../data/tasksApi'
-import { maxBy } from 'lodash'
+import { maxBy, indexOf } from 'lodash'
 
 export default class ProjectsContainer extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ export default class ProjectsContainer extends Component {
       selectedProjectId: 1,
       redirectToTasks: false,
       selectedProjectName: '',
+      selectedTaskId: 0,
     }
 
     this.handleAddProject = this.handleAddProject.bind(this)
@@ -63,6 +64,28 @@ export default class ProjectsContainer extends Component {
     return this.state.tasks.filter(task => task.projectId === id)
   }
 
+  updateProjectName = (id, value) => {
+    const projects = Object.assign([], this.state.projects)
+    const index = projects.findIndex(o => o.id === id)
+    projects[index].title = value
+    this.setState({ projects })
+  }
+
+  updateTaskName = (id, value) => {
+    const tasks = Object.assign([], this.state.tasks)
+    const index = tasks.findIndex(o => o.id === id)
+    tasks[index].task = value
+    this.setState({ tasks })
+  }
+
+  updateTaskCompleted = (id, value) => {
+    const tasks = Object.assign([], this.state.tasks)
+    const index = tasks.findIndex(o => o.id === id)
+    debugger
+    tasks[index].complete = value
+    this.setState({ tasks })
+  }
+
   //----------------------------
   // Code for the app
   //----------------------------
@@ -90,6 +113,15 @@ export default class ProjectsContainer extends Component {
     this.setState({ redirectToTasks: false })
   }
 
+  handleProjectClicked = projId => {
+    this.setState({ selectedProjectId: projId })
+  }
+
+  handleProjectChanged = e => {
+    e.preventDefault()
+    this.updateProjectName(this.state.selectedProjectId, e.target.value)
+  }
+
   handleAddTask = () => {
     const projectId = this.state.selectedProjectId
     const highestID = this.getNextTaskId(projectId)
@@ -105,8 +137,18 @@ export default class ProjectsContainer extends Component {
     this.handleShowTasks(projectId)
   }
 
-  handleProjectClicked = projId => {
-    this.setState({ selectedProjectId: projId })
+  handleTaskClicked = id => {
+    this.setState({ selectedTaskId: id })
+  }
+
+  handleTaskChanged = e => {
+    e.preventDefault()
+    this.updateTaskName(this.state.selectedTaskId, e.target.value)
+  }
+
+  handleTaskCompleted = e => {
+    e.preventDefault()
+    this.updateTaskCompleted(this.state.selectedTaskId, e.target.value)
   }
 
   render() {
@@ -119,6 +161,9 @@ export default class ProjectsContainer extends Component {
           projectName={selectedProjectName}
           backButtonClick={this.handleShowProject}
           addTask={this.handleAddTask}
+          onClick={this.handleTaskClicked}
+          onChange={this.handleTaskChanged}
+          onCompleted={this.handleTaskCompleted}
         />
       )
     } else {
@@ -133,6 +178,7 @@ export default class ProjectsContainer extends Component {
           addProject={this.handleAddProject}
           showTasks={this.handleShowTasks}
           projectClicked={this.handleProjectClicked}
+          handleChange={this.handleProjectChanged}
         />
       )
     }

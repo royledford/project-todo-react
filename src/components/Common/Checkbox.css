@@ -1,0 +1,76 @@
+.checkbox {
+  position: relative;
+  display: block;
+  padding-left: 21px;
+  margin-bottom: 14px;
+  margin-right: 14px;
+  color: var(--lightblue);
+}
+
+.checkbox input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.checkbox-box {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border: 1px solid white;
+  color: var(--lightblue);
+}
+
+/* Hover and focus states */
+.checkbox:hover input ~ .checkbox-box,
+.checkbox input:focus ~ .checkbox-box {
+  background: var(--darkblue);
+}
+
+/* Checked state */
+.checkbox input:checked ~ .checkbox-box {
+  background: var(--lightblue);
+}
+
+/* Hover state whilst checked */
+.checkbox:hover input:not([disabled]):checked ~ .checkbox-box,
+.checkbox input:checked:focus ~ .checkbox-box {
+  background: var(--lightblue);
+}
+
+/* Disabled state */
+.checkbox input:disabled ~ .checkbox-box {
+  pointer-events: none;
+  opacity: 0.6;
+  background: var(--darkblue);
+}
+
+/* Check mark */
+.checkbox-box:after {
+  position: absolute;
+  display: none;
+  content: '';
+}
+
+/* Show check mark */
+.checkbox input:checked ~ .checkbox-box:after {
+  display: block;
+}
+
+/* Checkbox tick */
+.checkbox-check .checkbox-box:after {
+  top: 0;
+  left: 8px;
+  width: 8px;
+  height: 18px;
+  transform: rotate(45deg);
+  border: solid var(--darkblue);
+  border-width: 0 4px 4px 0;
+}
+
+/* Disabled tick colour */
+.checkbox-check input:disabled ~ .checkbox-box:after {
+  border-color: var(--lightblue);
+}

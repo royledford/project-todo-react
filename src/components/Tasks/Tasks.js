@@ -19,12 +19,17 @@ export default class Tasks extends Component {
     backButtonClick: PropTypes.func.isRequired,
     projectName: PropTypes.string.isRequired,
     addTask: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onCompleted: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      taskCount: 0,
+      taskCount: '0',
+      taskCountCompleted: '0',
+      taskCountRemaining: '0',
+      percentageCompleted: '',
     }
   }
 
@@ -39,11 +44,12 @@ export default class Tasks extends Component {
   refreshUi = tasks => {
     const taskCount = this.getTaskCount(tasks)
     const countCompleted = this.getTaskCountCompleted(tasks)
+    const percentageCompleted = Math.floor(countCompleted / taskCount * 100) + '%'
     this.setState({
-      taskCount: tasks.length,
-      taskCountCompleted: countCompleted,
-      taskCountRemaining: taskCount - countCompleted,
-      percentageCompleted: Math.floor(countCompleted / taskCount * 100) + '%',
+      taskCount: tasks.length.toString(),
+      taskCountCompleted: countCompleted.toString(),
+      taskCountRemaining: (taskCount - countCompleted).toString(),
+      percentageCompleted: percentageCompleted,
     })
   }
 
@@ -56,11 +62,21 @@ export default class Tasks extends Component {
   }
 
   render() {
-    const { tasks, projectName, backButtonClick, addTask } = this.props
+    const { tasks, projectName, backButtonClick, addTask, onClick, onChange, onCompleted } = this.props
 
     const { taskCount, taskCountCompleted, taskCountRemaining, percentageCompleted } = this.state
 
-    const tasksRender = tasks.map(task => <Task key={task.id} id={task.id} name={task.task} />)
+    const tasksRender = tasks.map(task => (
+      <Task
+        key={task.id}
+        id={task.id}
+        value={task.task}
+        onClick={onClick}
+        onChange={onChange}
+        onCompleted={onCompleted}
+        complete={task.complete}
+      />
+    ))
 
     return (
       <div className="page-wrap">
@@ -77,7 +93,7 @@ export default class Tasks extends Component {
             rightLabel="Total"
           />
 
-          <ul className="projects-list">{tasksRender}</ul>
+          <div className="projects-list">{tasksRender}</div>
 
           <Footer add={addTask} showBackButton={true} onBackClick={backButtonClick} />
         </div>

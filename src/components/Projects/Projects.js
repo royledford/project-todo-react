@@ -22,6 +22,7 @@ export default class Projects extends Component {
     showTasks: PropTypes.func.isRequired,
     projectClicked: PropTypes.func.isRequired,
     selectedProjectId: PropTypes.number.isRequired,
+    handleChange: PropTypes.func.isRequired,
   }
 
   render() {
@@ -35,6 +36,7 @@ export default class Projects extends Component {
       showTasks,
       projectClicked,
       selectedProjectId,
+      handleChange,
     } = this.props
 
     const projectsRender = projects.map(project => (
@@ -44,6 +46,7 @@ export default class Projects extends Component {
         name={project.title}
         showTasks={showTasks}
         projectClicked={projectClicked}
+        handleChange={handleChange}
         selected={project.id === selectedProjectId}
       />
     ))
@@ -63,7 +66,7 @@ export default class Projects extends Component {
             rightLabel="Remaining"
           />
 
-          <ul className="projects-list">{projectsRender}</ul>
+          <div className="projects-list">{projectsRender}</div>
 
           <Footer add={addProject} />
         </div>

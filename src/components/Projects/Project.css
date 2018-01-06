@@ -3,24 +3,41 @@
   justify-content: space-between;
   align-items: center;
   height: 53px;
-
-  line-height: 53px;
-  font-size: 16px;
   margin: 0 20px;
-  text-indent: 4px;
 
-  color: white;
-  list-style: none;
   border-bottom: 1px solid white;
 }
 
-.project-icon {
+.list-input {
+  width: 300px;
+  margin: 0 20px;
+
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+
+  line-height: 53px;
+  font-weight: 300;
+  font-size: 16px;
+  text-indent: 4px;
+}
+
+.list-input:focus {
+  outline: none;
+}
+
+.list-input:active {
+  outline: none;
+}
+
+.list-icon {
+  color: white;
   height: 53px;
   font-size: 22px;
   transition: all 250ms ease-out;
 }
 
-.project-icon:hover {
+.list-icon:hover {
   font-size: 32px;
   transition: all 250ms ease-out;
 }

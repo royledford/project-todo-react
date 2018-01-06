@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import FaPencil from 'react-icons/lib/fa/pencil'
 import FaPlus from 'react-icons/lib/fa/plus'
 import FaTrashO from 'react-icons/lib/fa/trash-o'
 import FaCaretLeft from 'react-icons/lib/fa/caret-left'
+import FaRefresh from 'react-icons/lib/fa/refresh'
 import './Footer.css'
 
 export default class Footer extends Component {
@@ -20,7 +20,7 @@ export default class Footer extends Component {
   render() {
     const { add, showBackButton, onBackClick } = this.props
 
-    let leftButton = <FaPencil />
+    let leftButton = <FaRefresh />
     if (showBackButton) {
       leftButton = <FaCaretLeft />
     }

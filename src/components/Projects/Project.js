@@ -9,6 +9,7 @@ export default class Project extends Component {
     name: PropTypes.string,
     showTasks: PropTypes.func.isRequired,
     projectClicked: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
   }
   static defaultProps = {
     name: 'New Project',
@@ -23,13 +24,19 @@ export default class Project extends Component {
   }
 
   render() {
-    const { name, projectClicked, selected } = this.props
+    const { name, projectClicked, selected, handleChange } = this.props
     const classOveride = selected ? 'list-item-selected' : ''
     return (
-      <li className={`list-item ${classOveride}`} onClick={e => this.handleClick(e)}>
-        {name}
-        <FaCaretRight className="project-icon" onClick={this.handleShowTasks} />
-      </li>
+      <div className="list-item">
+        <input
+          value={name}
+          type="text"
+          className="list-input"
+          onChange={e => handleChange(e)}
+          onClick={e => this.handleClick(e)}
+        />
+        <FaCaretRight className="list-icon" onClick={this.handleShowTasks} />
+      </div>
     )
   }
 }
