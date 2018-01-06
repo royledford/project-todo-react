@@ -19,7 +19,7 @@ export const tasks = [
   },
   {
     id: 4,
-    task: 'Proect exhaust port',
+    task: 'Protect exhaust port',
     projectId: 1,
     complete: false,
   },

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Projects from './Projects'
-import Tasks from '../Tasks/Tasks'
-import ProjectApi from '../../data/ProjectsApi'
-import TasksApi from '../../data/tasksApi'
+import Projects from './Projects/Projects'
+import Tasks from './Tasks/Tasks'
+import ProjectApi from '../data/ProjectsApi'
+import TasksApi from '../data/tasksApi'
 import { maxBy } from 'lodash'
 
 export default class ProjectsContainer extends Component {
@@ -11,13 +11,9 @@ export default class ProjectsContainer extends Component {
     this.state = {
       projects: [],
       tasks: [],
-      selectedProject: 0,
+      selectedProject: 1,
       redirectToTasks: false,
       selectedProjectName: '',
-      remainingProjectTasks: 0,
-      projectTaskCountCompleted: 0,
-      projectTaskCountRemaining: 0,
-      projectPercentageCompleted: 0,
     }
 
     this.handleAddProject = this.handleAddProject.bind(this)
@@ -32,26 +28,12 @@ export default class ProjectsContainer extends Component {
   //----------------------------
   // Helper methods for the data (a real api should provide these)
   //----------------------------
-  getTaskCount = (id = -1) => {
-    if (id === -1) {
-      // get all
-      return this.state.tasks.length
-    } else {
-      // get for passed id
-      const tasks = this.state.tasks.filter(task => task.projectId === id)
-      return tasks.length
-    }
+  getTaskCount = () => {
+    return this.state.tasks.length
   }
 
-  getTaskCountCompleted = (id = -1) => {
-    if (id === -1) {
-      // get all
-      return this.state.tasks.filter(task => task.complete).length
-    } else {
-      // get for passed id
-      const tasks = this.state.tasks.filter(task => task.projectId === id && task.complete)
-      return tasks.length
-    }
+  getTaskCountCompleted = () => {
+    return this.state.tasks.filter(task => task.complete).length
   }
 
   getProjectCount = () => {
@@ -62,17 +44,10 @@ export default class ProjectsContainer extends Component {
     return 1 - this.getPercentageCompleted()
   }
 
-  getPercentageCompleted = (id = -1) => {
-    if (id === -1) {
-      // get all
-      const complete = this.getTaskCountCompleted()
-      const total = this.getTaskCount()
-      return complete / total
-    } else {
-      const complete = this.getTaskCountCompleted(id)
-      const total = this.getTaskCount(id)
-      return complete / total
-    }
+  getPercentageCompleted = () => {
+    const complete = this.getTaskCountCompleted()
+    const total = this.getTaskCount()
+    return complete / total
   }
 
   getNextProjectId = () => {
@@ -93,18 +68,10 @@ export default class ProjectsContainer extends Component {
   //----------------------------
   handleShowTasks = id => {
     const projectName = this.state.projects.filter(project => project.id === id)[0].title
-    const taskCount = this.getTaskCount(id)
-    const taskCountCompleted = this.getTaskCountCompleted(id)
-    const taskRemaining = taskCount - taskCountCompleted
-    const percentageCompleted = this.getPercentageCompleted(id)
     this.setState({
       selectedProject: id,
       selectedProjectName: projectName,
       redirectToTasks: true,
-      projectTaskCount: taskCount,
-      projectTaskCountCompleted: taskCountCompleted,
-      projectTaskCountRemaining: taskRemaining,
-      projectPercentageCompleted: percentageCompleted,
     })
   }
 
@@ -135,39 +102,25 @@ export default class ProjectsContainer extends Component {
     const tasks = Object.assign([], this.state.tasks)
     tasks.push(newTask)
     this.setState({ tasks })
+    this.handleShowTasks(projectId)
   }
 
   render() {
-    const {
-      projects,
-      tasks,
-      selectedProject,
-      redirectToTasks,
-      selectedProjectName,
-      projectTaskCount,
-      remainingProjectTasks,
-      projectTaskCountCompleted,
-      projectTaskCountRemaining,
-      projectPercentageCompleted,
-    } = this.state
+    const { projects, selectedProject, redirectToTasks, selectedProjectName } = this.state
 
     if (redirectToTasks) {
       return (
         <Tasks
           tasks={this.getProjectTasks(selectedProject)}
           projectName={selectedProjectName}
-          taskCount={projectTaskCount}
-          taskCountCompleted={projectTaskCountCompleted}
           backButtonClick={this.handleShowProject}
-          remaingTasks={projectTaskCountRemaining}
-          percentageCompleted={projectPercentageCompleted * 100 + '%'}
           addTask={this.handleAddTask}
         />
       )
     } else {
       return (
         <Projects
-          projects={this.state.projects}
+          projects={projects}
           projectCount={this.getProjectCount()}
           taskCount={this.getTaskCount()}
           percentageRemaining={Math.floor(this.getPercentageRemaining() * 100) + '%'}

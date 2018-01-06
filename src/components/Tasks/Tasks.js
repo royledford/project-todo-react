@@ -8,34 +8,57 @@ import './Tasks.css'
 
 export default class Tasks extends Component {
   static propTypes = {
-    backButtonClick: PropTypes.func,
-    someProp: PropTypes.string,
-  }
-  static defaultProps = {
-    someProp: 'someValue',
+    tasks: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        task: PropTypes.string,
+        projectId: PropTypes.number,
+        complete: PropTypes.bool,
+      })
+    ),
+    backButtonClick: PropTypes.func.isRequired,
+    projectName: PropTypes.string.isRequired,
+    addTask: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      someState: true,
+      taskCount: 0,
     }
   }
 
-  addTask = () => {
-    this.props.addTask(this.props.pro)
+  componentDidMount() {
+    this.refreshUi(this.props.tasks)
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.refreshUi(nextProps.tasks)
+  }
+
+  refreshUi = tasks => {
+    const taskCount = this.getTaskCount(tasks)
+    const countCompleted = this.getTaskCountCompleted(tasks)
+    this.setState({
+      taskCount: tasks.length,
+      taskCountCompleted: countCompleted,
+      taskCountRemaining: taskCount - countCompleted,
+      percentageCompleted: Math.floor(countCompleted / taskCount * 100) + '%',
+    })
+  }
+
+  getTaskCount = tasks => {
+    return tasks.length
+  }
+
+  getTaskCountCompleted = tasks => {
+    return tasks.filter(task => task.complete).length
+  }
+
   render() {
-    const {
-      tasks,
-      projectName,
-      taskCount,
-      taskCountCompleted,
-      remaingTasks,
-      percentageCompleted,
-      backButtonClick,
-      addTask,
-    } = this.props
+    const { tasks, projectName, backButtonClick, addTask } = this.props
+
+    const { taskCount, taskCountCompleted, taskCountRemaining, percentageCompleted } = this.state
 
     const tasksRender = tasks.map(task => <Task key={task.id} id={task.id} name={task.task} />)
 
@@ -48,7 +71,7 @@ export default class Tasks extends Component {
           <Stats
             leftText={taskCountCompleted}
             leftLabel="Complete"
-            centerText={remaingTasks}
+            centerText={taskCountRemaining}
             centerLabel="Remaining"
             rightText={taskCount}
             rightLabel="Total"
