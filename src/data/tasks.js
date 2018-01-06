@@ -23,4 +23,16 @@ export const tasks = [
     projectId: 1,
     complete: false,
   },
+  {
+    id: 5,
+    task: 'Build clone army',
+    projectId: 2,
+    complete: true,
+  },
+  {
+    id: 6,
+    task: 'Kill the Jedi',
+    projectId: 2,
+    complete: false,
+  },
 ]

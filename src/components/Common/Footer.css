@@ -13,7 +13,8 @@
 }
 
 .footer-icon {
-  font-size: 24px;
+  color: white;
+  font-size: 30px;
   margin: 20px;
   transition: all 250ms ease-out;
 }
@@ -28,6 +29,7 @@
 
 .footer-icon:hover {
   transform: scale(1.4);
+  color: var(--lightblue);
   transition: all 250ms ease-out;
 }
 

@@ -8,7 +8,7 @@ import './Tasks.css'
 
 export default class Tasks extends Component {
   static propTypes = {
-    onClick: PropTypes.func,
+    backButtonClick: PropTypes.func,
     someProp: PropTypes.string,
   }
   static defaultProps = {
@@ -22,27 +22,41 @@ export default class Tasks extends Component {
     }
   }
 
+  addTask = () => {
+    this.props.addTask(this.props.pro)
+  }
   render() {
-    const { tasks, projectName, taskCount } = this.props
+    const {
+      tasks,
+      projectName,
+      taskCount,
+      taskCountCompleted,
+      remaingTasks,
+      percentageCompleted,
+      backButtonClick,
+      addTask,
+    } = this.props
+
     const tasksRender = tasks.map(task => <Task key={task.id} id={task.id} name={task.task} />)
+
     return (
       <div className="page-wrap">
         <div className="content-wrap">
           <h1 className="projects-title">{projectName}</h1>
-          <ProgressMeter value="22" />
+          <ProgressMeter value={percentageCompleted} />
 
           <Stats
-            leftText={taskCount}
+            leftText={taskCountCompleted}
             leftLabel="Complete"
-            centerText="200"
+            centerText={remaingTasks}
             centerLabel="Remaining"
-            rightText="33"
+            rightText={taskCount}
             rightLabel="Total"
           />
 
           <ul className="projects-list">{tasksRender}</ul>
 
-          <Footer add={() => {}} />
+          <Footer add={addTask} showBackButton={true} onBackClick={backButtonClick} />
         </div>
       </div>
     )
