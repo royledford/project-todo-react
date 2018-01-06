@@ -20,6 +20,8 @@ export default class Projects extends Component {
     percentageComplete: PropTypes.string.isRequired,
     addProject: PropTypes.func.isRequired,
     showTasks: PropTypes.func.isRequired,
+    projectClicked: PropTypes.func.isRequired,
+    selectedProjectId: PropTypes.number.isRequired,
   }
 
   render() {
@@ -31,10 +33,21 @@ export default class Projects extends Component {
       percentageComplete,
       addProject,
       showTasks,
+      projectClicked,
+      selectedProjectId,
     } = this.props
+
     const projectsRender = projects.map(project => (
-      <Project key={project.id} id={project.id} name={project.title} showTasks={showTasks} />
+      <Project
+        key={project.id}
+        id={project.id}
+        name={project.title}
+        showTasks={showTasks}
+        projectClicked={projectClicked}
+        selected={project.id === selectedProjectId}
+      />
     ))
+
     return (
       <div className="page-wrap">
         <div className="content-wrap">

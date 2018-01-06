@@ -11,7 +11,7 @@ export default class ProjectsContainer extends Component {
     this.state = {
       projects: [],
       tasks: [],
-      selectedProject: 1,
+      selectedProjectId: 1,
       redirectToTasks: false,
       selectedProjectName: '',
     }
@@ -55,7 +55,7 @@ export default class ProjectsContainer extends Component {
   }
 
   getNextTaskId = () => {
-    const projectTasks = this.getProjectTasks(this.state.selectedProject)
+    const projectTasks = this.getProjectTasks(this.state.selectedProjectId)
     return maxBy(projectTasks, 'id').id
   }
 
@@ -69,7 +69,7 @@ export default class ProjectsContainer extends Component {
   handleShowTasks = id => {
     const projectName = this.state.projects.filter(project => project.id === id)[0].title
     this.setState({
-      selectedProject: id,
+      selectedProjectId: id,
       selectedProjectName: projectName,
       redirectToTasks: true,
     })
@@ -91,7 +91,7 @@ export default class ProjectsContainer extends Component {
   }
 
   handleAddTask = () => {
-    const projectId = this.state.selectedProject
+    const projectId = this.state.selectedProjectId
     const highestID = this.getNextTaskId(projectId)
     const newTask = {
       id: highestID + 1,
@@ -105,13 +105,17 @@ export default class ProjectsContainer extends Component {
     this.handleShowTasks(projectId)
   }
 
+  handleProjectClicked = projId => {
+    this.setState({ selectedProjectId: projId })
+  }
+
   render() {
-    const { projects, selectedProject, redirectToTasks, selectedProjectName } = this.state
+    const { projects, selectedProjectId, redirectToTasks, selectedProjectName } = this.state
 
     if (redirectToTasks) {
       return (
         <Tasks
-          tasks={this.getProjectTasks(selectedProject)}
+          tasks={this.getProjectTasks(selectedProjectId)}
           projectName={selectedProjectName}
           backButtonClick={this.handleShowProject}
           addTask={this.handleAddTask}
@@ -121,12 +125,14 @@ export default class ProjectsContainer extends Component {
       return (
         <Projects
           projects={projects}
+          selectedProjectId={selectedProjectId}
           projectCount={this.getProjectCount()}
           taskCount={this.getTaskCount()}
           percentageRemaining={Math.floor(this.getPercentageRemaining() * 100) + '%'}
           percentageComplete={Math.floor(this.getPercentageCompleted() * 100) + '%'}
           addProject={this.handleAddProject}
           showTasks={this.handleShowTasks}
+          projectClicked={this.handleProjectClicked}
         />
       )
     }
