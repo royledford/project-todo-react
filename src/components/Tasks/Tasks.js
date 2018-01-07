@@ -83,7 +83,7 @@ export default class Tasks extends Component {
       <div className="page-wrap">
         <div className="content-wrap">
           <h1 className="projects-title">{projectName}</h1>
-          {/* <ProgressMeter value={percentageCompleted} /> */}
+
           <div className="projects-progress">
             <ProgressMeter strokeWidth={10} sqSize={126} percentage={percentageCompleted} />
             <span className="meter-label">Completed</span>
