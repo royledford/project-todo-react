@@ -16,6 +16,7 @@
 }
 
 .stat:last-child {
+  width: 123px;
   margin-right: -1px;
 }
 

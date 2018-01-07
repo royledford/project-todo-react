@@ -6,14 +6,14 @@
   width: 100%;
   height: 100%;
   background-color: var(--darkestblue);
-  background: linear-gradient(120deg, #1f1d3e, #2b2a57, #5d5aa2);
+  background: linear-gradient(120deg, #1f1d3e, #212144, #000000);
 }
 
 .content-wrap {
   position: relative;
   width: 375px;
   height: 667px;
-  border: 1px solid var(--darkblue);
+  border: 1px solid var(--lightblue);
   background: linear-gradient(120deg, #5d5aa2, #2b2a57, #1f1d3e);
 }
 
