@@ -20,7 +20,6 @@ export default class Tasks extends Component {
     projectName: PropTypes.string.isRequired,
     addTask: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    onCompleted: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -62,7 +61,7 @@ export default class Tasks extends Component {
   }
 
   render() {
-    const { tasks, projectName, backButtonClick, addTask, onClick, onChange, onCompleted } = this.props
+    const { tasks, projectName, backButtonClick, addTask, onClick, onChange } = this.props
 
     const { taskCount, taskCountCompleted, taskCountRemaining, percentageCompleted } = this.state
 
@@ -73,7 +72,6 @@ export default class Tasks extends Component {
         value={task.task}
         onClick={onClick}
         onChange={onChange}
-        onCompleted={onCompleted}
         complete={task.complete}
       />
     ))

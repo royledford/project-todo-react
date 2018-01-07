@@ -9,7 +9,6 @@ export default class Task extends Component {
     value: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    onCompleted: PropTypes.func.isRequired,
     complete: PropTypes.bool.isRequired,
   }
 
@@ -18,17 +17,18 @@ export default class Task extends Component {
   }
 
   render() {
-    const { name, onChange, handleClick, complete, onCompleted } = this.props
+    const { id, value, onChange, handleClick, complete } = this.props
+    // console.log(complete)
     return (
       <div className="list-item" onClick={e => this.handleClick(e)}>
         <input
-          value={name}
+          value={value}
           type="text"
           className="list-input"
-          onChange={onCompleted}
+          onChange={onChange}
           onClick={e => this.handleClick(e)}
         />
-        <Checkbox id="complete" checked={complete} onChange={onCompleted} />
+        <Checkbox id={`complete-${id}`} checked={complete} />
       </div>
     )
   }

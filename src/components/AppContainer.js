@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Projects from './Projects/Projects'
 import Tasks from './Tasks/Tasks'
-import ProjectApi from '../data/ProjectsApi'
+import ProjectsApi from '../data/ProjectsApi'
 import TasksApi from '../data/tasksApi'
 import { maxBy, indexOf } from 'lodash'
 
@@ -21,7 +21,7 @@ export default class ProjectsContainer extends Component {
   }
 
   componentDidMount() {
-    const projects = ProjectApi.getProjects()
+    const projects = ProjectsApi.getProjects()
     const tasks = TasksApi.getTasks()
     this.setState({ projects, tasks })
   }
@@ -61,6 +61,7 @@ export default class ProjectsContainer extends Component {
   }
 
   getProjectTasks = id => {
+    // const tasks = this.state.tasks.filter(task => task.projectId === id)
     return this.state.tasks.filter(task => task.projectId === id)
   }
 
@@ -75,14 +76,6 @@ export default class ProjectsContainer extends Component {
     const tasks = Object.assign([], this.state.tasks)
     const index = tasks.findIndex(o => o.id === id)
     tasks[index].task = value
-    this.setState({ tasks })
-  }
-
-  updateTaskCompleted = (id, value) => {
-    const tasks = Object.assign([], this.state.tasks)
-    const index = tasks.findIndex(o => o.id === id)
-    debugger
-    tasks[index].complete = value
     this.setState({ tasks })
   }
 
@@ -146,11 +139,6 @@ export default class ProjectsContainer extends Component {
     this.updateTaskName(this.state.selectedTaskId, e.target.value)
   }
 
-  handleTaskCompleted = e => {
-    e.preventDefault()
-    this.updateTaskCompleted(this.state.selectedTaskId, e.target.value)
-  }
-
   render() {
     const { projects, selectedProjectId, redirectToTasks, selectedProjectName } = this.state
 
@@ -163,7 +151,6 @@ export default class ProjectsContainer extends Component {
           addTask={this.handleAddTask}
           onClick={this.handleTaskClicked}
           onChange={this.handleTaskChanged}
-          onCompleted={this.handleTaskCompleted}
         />
       )
     } else {
