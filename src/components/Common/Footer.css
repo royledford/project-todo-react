@@ -2,10 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  width: 375px;
+  position: absolute;
+  width: 373px;
   height: 72px;
-  bottom: 72px;
+  bottom: 0;
   background-color: var(--darkblue);
   border-left: 1px solid var(--darkblue);
   border-bottom: 1px solid var(--darkblue);
