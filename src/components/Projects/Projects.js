@@ -17,7 +17,7 @@ export default class Projects extends Component {
     projectCount: PropTypes.number.isRequired,
     taskCount: PropTypes.number.isRequired,
     percentageRemaining: PropTypes.string.isRequired,
-    percentageComplete: PropTypes.string.isRequired,
+    percentageComplete: PropTypes.number.isRequired,
     addProject: PropTypes.func.isRequired,
     showTasks: PropTypes.func.isRequired,
     projectClicked: PropTypes.func.isRequired,
@@ -55,7 +55,11 @@ export default class Projects extends Component {
       <div className="page-wrap">
         <div className="content-wrap">
           <h1 className="projects-title">Projects</h1>
-          <ProgressMeter value={percentageComplete} />
+
+          <div className="projects-progress">
+            <ProgressMeter strokeWidth={10} sqSize={126} percentage={percentageComplete} />
+            <span className="meter-label">Completed</span>
+          </div>
 
           <Stats
             leftText={projectCount.toString()}

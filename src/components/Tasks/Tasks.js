@@ -28,7 +28,7 @@ export default class Tasks extends Component {
       taskCount: '0',
       taskCountCompleted: '0',
       taskCountRemaining: '0',
-      percentageCompleted: '',
+      percentageCompleted: 0,
     }
   }
 
@@ -43,7 +43,10 @@ export default class Tasks extends Component {
   refreshUi = tasks => {
     const taskCount = this.getTaskCount(tasks)
     const countCompleted = this.getTaskCountCompleted(tasks)
-    const percentageCompleted = Math.floor(countCompleted / taskCount * 100) + '%'
+    let percentageCompleted = 0
+    if (taskCount > 0) {
+      percentageCompleted = Math.floor(countCompleted / taskCount * 100)
+    }
     this.setState({
       taskCount: tasks.length.toString(),
       taskCountCompleted: countCompleted.toString(),
@@ -80,7 +83,11 @@ export default class Tasks extends Component {
       <div className="page-wrap">
         <div className="content-wrap">
           <h1 className="projects-title">{projectName}</h1>
-          <ProgressMeter value={percentageCompleted} />
+          {/* <ProgressMeter value={percentageCompleted} /> */}
+          <div className="projects-progress">
+            <ProgressMeter strokeWidth={10} sqSize={126} percentage={percentageCompleted} />
+            <span className="meter-label">Completed</span>
+          </div>
 
           <Stats
             leftText={taskCountCompleted}

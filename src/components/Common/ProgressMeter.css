@@ -1,22 +1,25 @@
-.meter h1 {
-  margin: 0;
-  padding: 0;
+#progressInput {
+  margin: 20px auto;
+  width: 30%;
 }
 
-.meter {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 126px;
-  height: 126px;
-  color: white;
-  font-size: 31px;
-  background-color: var(--lightblue);
-  margin: 0 auto;
-  margin-bottom: 30px;
+.circle-background,
+.circle-progress {
+  fill: none;
 }
 
-.meter-text {
-  font-size: 12px;
+.circle-background {
+  stroke: var(--lightblue);
+}
+
+.circle-progress {
+  stroke: var(--darkblue);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.circle-text {
+  font-size: 2.5em;
+  font-weight: bold;
+  fill: white;
 }

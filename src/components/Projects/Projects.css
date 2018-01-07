@@ -29,13 +29,17 @@
 .projects-progress {
   width: 126px;
   height: 126px;
-  background-color: var(--lightblue);
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 36px;
+  text-align: center;
 }
 
 .projects-list {
   height: 324px;
   overflow: hidden;
   overflow-y: scroll;
+}
+
+.meter-label {
+  color: white;
 }

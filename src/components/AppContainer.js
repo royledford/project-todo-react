@@ -42,13 +42,15 @@ export default class ProjectsContainer extends Component {
   }
 
   getPercentageRemaining = () => {
-    return 1 - this.getPercentageCompleted()
+    console.log(this.getPercentageCompleted())
+    return 100 - this.getPercentageCompleted()
   }
 
   getPercentageCompleted = () => {
     const complete = this.getTaskCountCompleted()
     const total = this.getTaskCount()
-    return complete / total
+    // return Math.floor(complete / total)
+    return Math.floor(complete / total * 100)
   }
 
   getNextProjectId = () => {
@@ -160,8 +162,8 @@ export default class ProjectsContainer extends Component {
           selectedProjectId={selectedProjectId}
           projectCount={this.getProjectCount()}
           taskCount={this.getTaskCount()}
-          percentageRemaining={Math.floor(this.getPercentageRemaining() * 100) + '%'}
-          percentageComplete={Math.floor(this.getPercentageCompleted() * 100) + '%'}
+          percentageRemaining={this.getPercentageRemaining() + '%'}
+          percentageComplete={this.getPercentageCompleted()}
           addProject={this.handleAddProject}
           showTasks={this.handleShowTasks}
           projectClicked={this.handleProjectClicked}
