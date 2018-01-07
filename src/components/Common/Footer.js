@@ -10,15 +10,15 @@ export default class Footer extends Component {
   static propTypes = {
     add: PropTypes.func.isRequired,
     showBackButton: PropTypes.bool,
-    onBackClick: PropTypes.func,
+    onLeftIconClick: PropTypes.func,
   }
   static defaultProps = {
     showBackButton: false,
-    onBackClick: () => {},
+    onLeftIconClick: () => {},
   }
 
   render() {
-    const { add, showBackButton, onBackClick } = this.props
+    const { add, showBackButton, onLeftIconClick } = this.props
 
     let leftButton = <FaRefresh />
     if (showBackButton) {
@@ -27,7 +27,7 @@ export default class Footer extends Component {
 
     return (
       <footer className="footer">
-        <div className="footer-icon" onClick={onBackClick}>
+        <div className="footer-icon" onClick={onLeftIconClick}>
           {leftButton}
         </div>
         <div className="footer-featured" onClick={add}>

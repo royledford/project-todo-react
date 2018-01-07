@@ -21,6 +21,10 @@ export default class ProjectsContainer extends Component {
   }
 
   componentDidMount() {
+    this.loadData()
+  }
+
+  loadData = () => {
     const projects = ProjectsApi.getProjects()
     const tasks = TasksApi.getTasks()
     this.setState({ projects, tasks })
@@ -168,6 +172,7 @@ export default class ProjectsContainer extends Component {
           showTasks={this.handleShowTasks}
           projectClicked={this.handleProjectClicked}
           handleChange={this.handleProjectChanged}
+          refresh={this.loadData}
         />
       )
     }

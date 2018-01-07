@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Stats from '../Common/Stats'
 import Project from './Project'
@@ -23,6 +24,7 @@ export default class Projects extends Component {
     projectClicked: PropTypes.func.isRequired,
     selectedProjectId: PropTypes.number.isRequired,
     handleChange: PropTypes.func.isRequired,
+    refresh: PropTypes.func.isRequired,
   }
 
   render() {
@@ -37,6 +39,7 @@ export default class Projects extends Component {
       projectClicked,
       selectedProjectId,
       handleChange,
+      refresh,
     } = this.props
 
     const projectsRender = projects.map(project => (
@@ -72,7 +75,7 @@ export default class Projects extends Component {
 
           <div className="projects-list">{projectsRender}</div>
 
-          <Footer add={addProject} />
+          <Footer add={addProject} onLeftIconClick={refresh} />
         </div>
       </div>
     )

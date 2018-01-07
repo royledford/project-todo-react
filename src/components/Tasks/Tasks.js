@@ -100,7 +100,7 @@ export default class Tasks extends Component {
 
           <div className="projects-list">{tasksRender}</div>
 
-          <Footer add={addTask} showBackButton={true} onBackClick={backButtonClick} />
+          <Footer add={addTask} showBackButton={true} onLeftIconClick={backButtonClick} />
         </div>
       </div>
     )
