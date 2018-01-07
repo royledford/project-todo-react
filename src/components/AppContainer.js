@@ -31,7 +31,7 @@ export default class ProjectsContainer extends Component {
   }
 
   //----------------------------
-  // Helper methods for the data (a real api should provide these)
+  // Helper methods for the data (a real backend/api should provide most of these)
   //----------------------------
   getTaskCount = () => {
     return this.state.tasks.length
@@ -46,15 +46,17 @@ export default class ProjectsContainer extends Component {
   }
 
   getPercentageRemaining = () => {
-    console.log(this.getPercentageCompleted())
     return 100 - this.getPercentageCompleted()
   }
 
   getPercentageCompleted = () => {
     const complete = this.getTaskCountCompleted()
     const total = this.getTaskCount()
-    // return Math.floor(complete / total)
-    return Math.floor(complete / total * 100)
+    if (total <= 0) {
+      return 0
+    } else {
+      return Math.floor(complete / total * 100)
+    }
   }
 
   getNextProjectId = () => {

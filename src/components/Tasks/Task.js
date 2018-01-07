@@ -18,7 +18,7 @@ export default class Task extends Component {
 
   render() {
     const { id, value, onChange, complete } = this.props
-    // console.log(complete)
+
     return (
       <div className="list-item" onClick={e => this.handleClick(e)}>
         <input
