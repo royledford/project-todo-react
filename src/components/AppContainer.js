@@ -63,11 +63,12 @@ export default class ProjectsContainer extends Component {
 
   getNextTaskId = () => {
     const projectTasks = this.getProjectTasks(this.state.selectedProjectId)
-    return maxBy(projectTasks, 'id').id
+    let nextId = 0
+    if (projectTasks.length > 0) nextId = maxBy(projectTasks, 'id').id
+    return nextId
   }
 
   getProjectTasks = id => {
-    // const tasks = this.state.tasks.filter(task => task.projectId === id)
     return this.state.tasks.filter(task => task.projectId === id)
   }
 
