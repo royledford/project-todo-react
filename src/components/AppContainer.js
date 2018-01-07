@@ -3,7 +3,7 @@ import Projects from './Projects/Projects'
 import Tasks from './Tasks/Tasks'
 import ProjectsApi from '../data/ProjectsApi'
 import TasksApi from '../data/tasksApi'
-import { maxBy, indexOf } from 'lodash'
+import { maxBy } from 'lodash'
 
 export default class ProjectsContainer extends Component {
   constructor(props) {

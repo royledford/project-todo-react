@@ -17,7 +17,7 @@ export default class Task extends Component {
   }
 
   render() {
-    const { id, value, onChange, handleClick, complete } = this.props
+    const { id, value, onChange, complete } = this.props
     // console.log(complete)
     return (
       <div className="list-item" onClick={e => this.handleClick(e)}>
@@ -28,7 +28,7 @@ export default class Task extends Component {
           onChange={onChange}
           onClick={e => this.handleClick(e)}
         />
-        <Checkbox id={`complete-${id}`} checked={complete} />
+        <Checkbox id={`complete-${id}`} checked={complete} onChange={() => {}} />
       </div>
     )
   }

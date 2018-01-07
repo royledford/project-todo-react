@@ -24,7 +24,7 @@ export default class Project extends Component {
   }
 
   render() {
-    const { name, projectClicked, selected, handleChange } = this.props
+    const { name, selected, handleChange } = this.props
     const classOveride = selected ? 'list-item-selected' : ''
 
     return (
