@@ -19,6 +19,7 @@ export default class Projects extends Component {
     percentageRemaining: PropTypes.string.isRequired,
     percentageComplete: PropTypes.number.isRequired,
     addProject: PropTypes.func.isRequired,
+    deleteProject: PropTypes.func.isRequired,
     showTasks: PropTypes.func.isRequired,
     projectClicked: PropTypes.func.isRequired,
     selectedProjectId: PropTypes.number.isRequired,
@@ -34,6 +35,7 @@ export default class Projects extends Component {
       percentageRemaining,
       percentageComplete,
       addProject,
+      deleteProject,
       showTasks,
       projectClicked,
       selectedProjectId,
@@ -74,7 +76,7 @@ export default class Projects extends Component {
 
           <div className="projects-list">{projectsRender}</div>
 
-          <Footer add={addProject} onLeftIconClick={refresh} />
+          <Footer add={addProject} onLeftIconClick={refresh} onRightIconClick={deleteProject} />
         </div>
       </div>
     )

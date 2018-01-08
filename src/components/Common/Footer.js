@@ -11,14 +11,16 @@ export default class Footer extends Component {
     add: PropTypes.func.isRequired,
     showBackButton: PropTypes.bool,
     onLeftIconClick: PropTypes.func,
+    onRightIconClick: PropTypes.func,
   }
   static defaultProps = {
     showBackButton: false,
     onLeftIconClick: () => {},
+    onRightIconClick: () => {},
   }
 
   render() {
-    const { add, showBackButton, onLeftIconClick } = this.props
+    const { add, showBackButton, onLeftIconClick, onRightIconClick } = this.props
 
     let leftButton = <FaRefresh />
     if (showBackButton) {
@@ -33,7 +35,7 @@ export default class Footer extends Component {
         <div className="footer-featured" onClick={add}>
           <FaPlus />
         </div>
-        <div className="footer-icon">
+        <div className="footer-icon" onClick={onRightIconClick}>
           <FaTrashO />
         </div>
       </footer>

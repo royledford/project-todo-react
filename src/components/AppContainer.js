@@ -116,6 +116,19 @@ export default class ProjectsContainer extends Component {
     this.setState({ projects })
   }
 
+  handleDeleteProject = () => {
+    const id = this.state.selectedProjectId
+    // delete all the projects tasks first
+    const currentTasks = Object.assign([], this.state.tasks)
+    const tasks = currentTasks.filter(task => task.projectId !== id)
+
+    // then delete the project
+    const currentProjects = Object.assign([], this.state.projects)
+    const projects = currentProjects.filter(proj => proj.id !== id)
+
+    this.setState({ tasks, projects })
+  }
+
   handleShowProject = () => {
     this.setState({ redirectToTasks: false })
   }
@@ -157,6 +170,13 @@ export default class ProjectsContainer extends Component {
     this.updateTaskCompleted(id)
   }
 
+  handleDeleteTask = () => {
+    const currentTasks = Object.assign([], this.state.tasks)
+    const id = this.state.selectedTaskId
+    const tasks = currentTasks.filter(task => task.id !== id)
+    this.setState({ tasks })
+  }
+
   render() {
     const { projects, selectedProjectId, redirectToTasks, selectedProjectName, selectedTaskId } = this.state
 
@@ -173,6 +193,7 @@ export default class ProjectsContainer extends Component {
           onClick={this.handleTaskClicked}
           onChange={this.handleTaskChanged}
           onChecked={this.handleTaskChecked}
+          onTaskDelete={this.handleDeleteTask}
         />
       )
     } else {
@@ -185,6 +206,7 @@ export default class ProjectsContainer extends Component {
           percentageRemaining={this.getPercentageRemaining() + '%'}
           percentageComplete={this.getPercentageCompleted()}
           addProject={this.handleAddProject}
+          deleteProject={this.handleDeleteProject}
           showTasks={this.handleShowTasks}
           projectClicked={this.handleProjectClicked}
           handleChange={this.handleProjectChanged}
