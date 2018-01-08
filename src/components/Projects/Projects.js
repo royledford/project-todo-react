@@ -27,6 +27,14 @@ export default class Projects extends Component {
     refresh: PropTypes.func.isRequired,
   }
 
+  scrollToBottom = () => {
+    this.listEnd.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.scrollToBottom()
+  }
+
   render() {
     const {
       projects,
@@ -74,7 +82,14 @@ export default class Projects extends Component {
             rightLabel="Remaining"
           />
 
-          <div className="projects-list">{projectsRender}</div>
+          <div className="projects-list">
+            {projectsRender}
+            <div
+              ref={el => {
+                this.listEnd = el
+              }}
+            />
+          </div>
 
           <Footer add={addProject} onLeftIconClick={refresh} onRightIconClick={deleteProject} />
         </div>

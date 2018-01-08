@@ -66,6 +66,14 @@ export default class Tasks extends Component {
     return tasks.filter(task => task.complete).length
   }
 
+  scrollToBottom = () => {
+    this.listEnd.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.scrollToBottom()
+  }
+
   render() {
     const {
       tasks,
@@ -112,7 +120,14 @@ export default class Tasks extends Component {
             rightLabel="Total"
           />
 
-          <div className="projects-list">{tasksRender}</div>
+          <div className="projects-list">
+            {tasksRender}{' '}
+            <div
+              ref={el => {
+                this.listEnd = el
+              }}
+            />
+          </div>
 
           <Footer
             add={addTask}
