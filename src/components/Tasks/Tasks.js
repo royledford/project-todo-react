@@ -20,6 +20,7 @@ export default class Tasks extends Component {
     projectName: PropTypes.string.isRequired,
     addTask: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    onChecked: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -64,18 +65,19 @@ export default class Tasks extends Component {
   }
 
   render() {
-    const { tasks, projectName, backButtonClick, addTask, onClick, onChange } = this.props
+    const { tasks, projectName, backButtonClick, addTask, onClick, onChange, onChecked } = this.props
 
     const { taskCount, taskCountCompleted, taskCountRemaining, percentageCompleted } = this.state
-
+    debugger
     const tasksRender = tasks.map(task => (
       <Task
         key={task.id}
         id={task.id}
         value={task.task}
+        complete={task.complete}
         onClick={onClick}
         onChange={onChange}
-        complete={task.complete}
+        onChecked={onChecked}
       />
     ))
 

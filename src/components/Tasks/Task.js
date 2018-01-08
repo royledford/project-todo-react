@@ -7,13 +7,19 @@ export default class Task extends Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
     value: PropTypes.string.isRequired,
+    complete: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    complete: PropTypes.bool.isRequired,
+    onChecked: PropTypes.func.isRequired,
   }
 
   handleClick = e => {
     this.props.onClick(this.props.id)
+  }
+
+  handleCheckChanged = e => {
+    // e.preventDefault()
+    this.props.onChecked(this.props.id)
   }
 
   render() {
@@ -28,7 +34,7 @@ export default class Task extends Component {
           onChange={onChange}
           onClick={e => this.handleClick(e)}
         />
-        <Checkbox id={`complete-${id}`} checked={complete} onChange={() => {}} />
+        <Checkbox id={`complete-${id}`} checked={complete} onChange={this.handleCheckChanged} />
       </div>
     )
   }

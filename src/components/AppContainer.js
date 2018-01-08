@@ -18,6 +18,7 @@ export default class ProjectsContainer extends Component {
     }
 
     this.handleAddProject = this.handleAddProject.bind(this)
+    this.getProjectTasks = this.getProjectTasks.bind(this)
   }
 
   componentDidMount() {
@@ -39,6 +40,27 @@ export default class ProjectsContainer extends Component {
 
   getTaskCountCompleted = () => {
     return this.state.tasks.filter(task => task.complete).length
+  }
+
+  getNextTaskId = () => {
+    const projectTasks = this.getProjectTasks(this.state.selectedProjectId)
+    let nextId = 0
+    if (projectTasks.length > 0) nextId = maxBy(projectTasks, 'id').id
+    return nextId
+  }
+
+  updateTaskName = (id, value) => {
+    const tasks = Object.assign([], this.state.tasks)
+    const index = tasks.findIndex(o => o.id === id)
+    tasks[index].task = value
+    this.setState({ tasks })
+  }
+
+  updateTaskCompleted = id => {
+    const tasks = Object.assign([], this.state.tasks)
+    const index = tasks.findIndex(o => o.id === id)
+    tasks[index].complete = !tasks[index].complete
+    this.setState({ tasks })
   }
 
   getProjectCount = () => {
@@ -63,13 +85,6 @@ export default class ProjectsContainer extends Component {
     return maxBy(this.state.projects, 'id').id
   }
 
-  getNextTaskId = () => {
-    const projectTasks = this.getProjectTasks(this.state.selectedProjectId)
-    let nextId = 0
-    if (projectTasks.length > 0) nextId = maxBy(projectTasks, 'id').id
-    return nextId
-  }
-
   getProjectTasks = id => {
     return this.state.tasks.filter(task => task.projectId === id)
   }
@@ -79,13 +94,6 @@ export default class ProjectsContainer extends Component {
     const index = projects.findIndex(o => o.id === id)
     projects[index].title = value
     this.setState({ projects })
-  }
-
-  updateTaskName = (id, value) => {
-    const tasks = Object.assign([], this.state.tasks)
-    const index = tasks.findIndex(o => o.id === id)
-    tasks[index].task = value
-    this.setState({ tasks })
   }
 
   //----------------------------
@@ -148,18 +156,25 @@ export default class ProjectsContainer extends Component {
     this.updateTaskName(this.state.selectedTaskId, e.target.value)
   }
 
+  handleTaskChecked = id => {
+    this.updateTaskCompleted(id)
+  }
+
   render() {
     const { projects, selectedProjectId, redirectToTasks, selectedProjectName } = this.state
 
     if (redirectToTasks) {
+      const projectTasks = this.getProjectTasks(selectedProjectId)
+      debugger
       return (
         <Tasks
-          tasks={this.getProjectTasks(selectedProjectId)}
+          tasks={projectTasks}
           projectName={selectedProjectName}
           backButtonClick={this.handleShowProject}
           addTask={this.handleAddTask}
           onClick={this.handleTaskClicked}
           onChange={this.handleTaskChanged}
+          onChecked={this.handleTaskChecked}
         />
       )
     } else {
