@@ -16,6 +16,7 @@ export default class Tasks extends Component {
         complete: PropTypes.bool,
       })
     ),
+    selectedTaskId: PropTypes.number.isRequired,
     backButtonClick: PropTypes.func.isRequired,
     projectName: PropTypes.string.isRequired,
     addTask: PropTypes.func.isRequired,
@@ -65,7 +66,7 @@ export default class Tasks extends Component {
   }
 
   render() {
-    const { tasks, projectName, backButtonClick, addTask, onClick, onChange, onChecked } = this.props
+    const { tasks, projectName, backButtonClick, addTask, onClick, onChange, onChecked, selectedTaskId } = this.props
 
     const { taskCount, taskCountCompleted, taskCountRemaining, percentageCompleted } = this.state
     debugger
@@ -78,6 +79,7 @@ export default class Tasks extends Component {
         onClick={onClick}
         onChange={onChange}
         onChecked={onChecked}
+        selected={task.id === selectedTaskId}
       />
     ))
 

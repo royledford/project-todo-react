@@ -43,10 +43,7 @@ export default class ProjectsContainer extends Component {
   }
 
   getNextTaskId = () => {
-    const projectTasks = this.getProjectTasks(this.state.selectedProjectId)
-    let nextId = 0
-    if (projectTasks.length > 0) nextId = maxBy(projectTasks, 'id').id
-    return nextId
+    return maxBy(this.state.tasks, 'id').id
   }
 
   updateTaskName = (id, value) => {
@@ -134,7 +131,7 @@ export default class ProjectsContainer extends Component {
 
   handleAddTask = () => {
     const projectId = this.state.selectedProjectId
-    const highestID = this.getNextTaskId(projectId)
+    const highestID = this.getNextTaskId()
     const newTask = {
       id: highestID + 1,
       task: 'New task',
@@ -161,15 +158,16 @@ export default class ProjectsContainer extends Component {
   }
 
   render() {
-    const { projects, selectedProjectId, redirectToTasks, selectedProjectName } = this.state
+    const { projects, selectedProjectId, redirectToTasks, selectedProjectName, selectedTaskId } = this.state
 
     if (redirectToTasks) {
       const projectTasks = this.getProjectTasks(selectedProjectId)
-      debugger
+
       return (
         <Tasks
           tasks={projectTasks}
           projectName={selectedProjectName}
+          selectedTaskId={selectedTaskId}
           backButtonClick={this.handleShowProject}
           addTask={this.handleAddTask}
           onClick={this.handleTaskClicked}

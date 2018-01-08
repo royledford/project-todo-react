@@ -7,6 +7,7 @@ export default class Project extends Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string,
+    selected: PropTypes.bool.isRequired,
     showTasks: PropTypes.func.isRequired,
     projectClicked: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,

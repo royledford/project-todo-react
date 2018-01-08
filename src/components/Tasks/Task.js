@@ -8,6 +8,7 @@ export default class Task extends Component {
     id: PropTypes.number.isRequired,
     value: PropTypes.string.isRequired,
     complete: PropTypes.bool.isRequired,
+    selected: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onChecked: PropTypes.func.isRequired,
@@ -18,15 +19,15 @@ export default class Task extends Component {
   }
 
   handleCheckChanged = e => {
-    // e.preventDefault()
     this.props.onChecked(this.props.id)
   }
 
   render() {
-    const { id, value, onChange, complete } = this.props
+    const { id, value, onChange, complete, selected } = this.props
+    const classOveride = selected ? 'list-item-selected' : ''
 
     return (
-      <div className="list-item" onClick={e => this.handleClick(e)}>
+      <div className={`list-item ${classOveride}`} onClick={e => this.handleClick(e)}>
         <input
           value={value}
           type="text"
